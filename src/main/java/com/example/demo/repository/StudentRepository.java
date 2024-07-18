@@ -12,14 +12,14 @@ import com.example.demo.entity.Course;
 
 @Repository
 @Transactional
-public class CourceRepository {
+public class StudentRepository {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private EntityManager manager;
 	
 	@Autowired
-	public CourceRepository(EntityManager manager) {
+	public StudentRepository(EntityManager manager) {
 		this.manager = manager;
 	}
 	

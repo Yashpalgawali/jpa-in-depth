@@ -24,10 +24,7 @@ public class DemoApplication implements CommandLineRunner {
  
 	@Override
 	public void run(String... args) throws Exception {
-//		Course course = repository.findById(1);
-//		 logger.info("Course is { }"+course);
-		 
-		repository.save(new Course("REST EXAMPLE"));
+	//	repository.playWithEntityManager();
 	}
 
 }
