@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
  
 
@@ -18,7 +20,29 @@ public class Passport {
 	@Column(nullable = false)
 	private String number;
 
-	
+	@OneToOne(fetch = FetchType.LAZY , mappedBy = "passport")
+	private Student student;
+
+	public Passport(Integer id, String number, Student student) {
+		super();
+		this.id = id;
+		this.number = number;
+		this.student = student;
+	}
+
+//	@Override
+//	public String toString() {
+//		return "Passport [id=" + id + ", number=" + number + ", student=" + student + "]";
+//	}
+
+	public Passport() {
+	}
+
+	@Override
+	public String toString() {
+		return "Passport [id=" + id + ", number=" + number + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -35,22 +59,13 @@ public class Passport {
 		this.number = number;
 	}
 
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", number=" + number + "]";
+	public Student getStudent() {
+		return student;
 	}
 
-	protected Passport() {
-		super();
-	}
-
-	public Passport(Integer id, String number) {
-		super();
-		this.id = id;
-		this.number = number;
-	}
+	public void setStudent(Student student) {
+		this.student = student;
+	} 
 	
-	public Passport(String number) {
-		this.number = number;
-	}
+	
 } 

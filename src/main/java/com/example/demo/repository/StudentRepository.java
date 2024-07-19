@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Passport;
+import com.example.demo.entity.Student;
 
 @Repository
 @Transactional
@@ -76,5 +78,26 @@ public class StudentRepository {
 		course2.setName("JPA in 50 steps - updated ");
 		manager.flush(); 
 		 
+	}
+	
+	
+	public  void someOperationToUnderstandPersistentContext() {
+		//Database Operation 1 - Retrieve Student by ID
+		 Student student = manager.find(Student.class, 2002);
+		// PersitenceContext(student)
+		 
+		 
+		//Database Operation 2 - Retrieve Passport
+		 Passport passport = student.getPassport();
+		//PersitenceContext(student , passport)
+		 
+		//Database Operation 3 - Update Passport
+		 passport.setNumber("NEW-UPDATED");
+		//PersitenceContext(student , passport++)
+		
+		 
+		 //Database Operation 4 - Update Student
+		 student.setName("Updated Name ");
+		//PersitenceContext(student++ , passport++)
 	}
 }

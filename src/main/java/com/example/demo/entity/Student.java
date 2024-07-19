@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -20,7 +21,7 @@ public class Student {
 	private String name;
 
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Passport passport;
 
 
