@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.entity.Course;
 import com.example.demo.entity.Passport;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
@@ -50,4 +51,24 @@ class StudentRepositoryTest {
 		studerepo.someOperationToUnderstandPersistentContext();
 	}
 
+	
+	@Test
+	@Transactional
+	void retriveStudentANdCOurses() {
+		 
+		  Student student = em.find(Student.class, 2001);
+		  logger.info("Student is { } "+student);
+		  logger.info("COURSES is { } "+student.getCourses());
+	}
+	
+	
+	@Test
+	@Transactional
+	void retriveCoursesAndStudents() {
+		 
+		Course course = em.find(Course.class, 10003);
+		  logger.info(" COURSE is { } "+course);
+		  logger.info("Student is { } "+course.getStudents());
+		  
+	}
 }

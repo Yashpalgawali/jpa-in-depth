@@ -27,8 +27,7 @@ public class StudentRepository {
 	
 	public Course save(Course course)
 	{
-		if(course.getId()==null)
-		{
+		if(course.getId()==null) {
 			  manager.persist(course);
 		}
 		else {
@@ -99,5 +98,39 @@ public class StudentRepository {
 		 //Database Operation 4 - Update Student
 		 student.setName("Updated Name ");
 		//PersitenceContext(student++ , passport++)
+	}
+	
+	
+	public void insertHardCodedStudentAndCourse() {
+		Student student = new Student("Jack");
+		
+		Course course = new Course("KAFKA in 100 steps");
+		
+		manager.persist(course);
+		manager.persist(student);
+		
+		student.addCourse(course);
+		course.addStudent(student);
+		
+		manager.persist(student); 
+		
+	}
+	
+	
+	public void insertStudentAndCourse(Course course,Student student) {
+//		Student student = new Student("Jack");
+//		
+//		Course course = new Course("KAFKA in 100 steps");
+		
+		student.addCourse(course);
+		course.addStudent(student);
+		
+		manager.persist(course);
+		manager.persist(student);
+		
+		
+		
+		manager.persist(student); 
+		
 	}
 }

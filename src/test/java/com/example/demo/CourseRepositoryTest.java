@@ -3,14 +3,18 @@ package com.example.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Course;
+import com.example.demo.entity.Review;
  
 @SpringBootTest(classes = DemoApplication.class )
 class CourseRepositoryTest {
@@ -18,6 +22,9 @@ class CourseRepositoryTest {
 	
 	@Autowired
 	com.example.demo.repository.CourceRepository  repository;
+	
+	@Autowired
+	EntityManager manager;
 	
 	@Test
 	void findByid() {
@@ -55,9 +62,20 @@ class CourseRepositoryTest {
 		 repository.playWithEntityManager();
 		
 	}
-
-//	@Test
-//	public void playWithEntityManager() {
-//		
-//	}
+	
+	@Test @DirtiesContext @Transactional
+	void retrieveReviewsForCourse() {
+		 
+		Course course = repository.findById(10004);
+		logger.info("Course is { }"+course.getReviews());
+	}
+	
+	@Test @DirtiesContext @Transactional
+	void retrieveCourseForReview() {
+		 
+		Review review = manager.find(Review.class, 5002);
+		 
+		logger.info("REVIEW is { }"+review);
+	}
+ 
 }
