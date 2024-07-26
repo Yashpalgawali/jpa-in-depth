@@ -21,7 +21,7 @@ import com.example.demo.entity.Course;
 import com.example.demo.entity.Student;
  
 @SpringBootTest(classes = DemoApplication.class )
-
+@Transactional
 class JPQLTest {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -91,7 +91,7 @@ class JPQLTest {
 		 
 	}
 	
-	@Test  @Transactional
+	@Test 
 	void jpql_students_with_passports_in_certain_pattern() {
 		
 		TypedQuery<Student> createQuery = em.createQuery("SELECT s FROM Student s  WHERE s.passport.number  LIKE '%123%'",Student.class );// TypedQuery Descending order
@@ -100,6 +100,46 @@ class JPQLTest {
 		logger.info("SELECT s FROM Student s  WHERE s.passport  LIKE '%23%' => {} "+result);
 		 
 	}
+
+	@Test
+	void joins()
+	{
+		Query query = em.createQuery("SELECT c, s FROM Course c JOIN c.students s"  );// 
+
+	  	List<Object[]> result = query.getResultList();
+		logger.info("Result Size = "+result.size());
+		
+		for(Object[] res : result) {
+			logger.info("Student => {} , XCourse=>{}"+ res[0],res[1]);
+		} 
+	}
 	
+
+	@Test
+	void left_joins()
+	{
+		Query query = em.createQuery("SELECT c, s FROM Course c LEFT JOIN c.students s"  );// 
+
+	  	List<Object[]> result = query.getResultList();
+		logger.info("Result Size = "+result.size());
+		
+		for(Object[] res : result) {
+			logger.info("Student => {} , XCourse=>{}"+ res[0],res[1]);
+		} 
+	}
+	
+	
+	@Test
+	void cross_joins()
+	{
+		Query query = em.createQuery("SELECT c, s FROM Course c ,Student s "  );// 
+
+	  	List<Object[]> result = query.getResultList();
+		logger.info("Result Size = "+result.size());
+		
+		for(Object[] res : result) {
+			logger.info("Student => {} , XCourse=>{}"+ res[0],res[1]);
+		} 
+	}
 	 
 }

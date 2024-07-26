@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,14 +19,17 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="course")
 //@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
 //@NamedQuery(name="query_get_courses_with_name_like" , query = "SELECT c FROM Course c WHERE  c.name like '%100%'")
 @NamedQueries(value = {
-		@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
-		@NamedQuery(name="query_get_courses_with_name_like" , query = "SELECT c FROM Course c WHERE  c.name like '%100%'")
-})
+					@NamedQuery(name = "query_get_all_courses", query = "FROM Course c"),
+					@NamedQuery(name="query_get_courses_with_name_like" , query = "SELECT c FROM Course c WHERE  c.name like '%100%'")
+				})
+@Cacheable
 public class Course {
 
 	@Id @GeneratedValue
@@ -44,7 +48,8 @@ public class Course {
 	private List<Review> reviews = new ArrayList<>();
 	
 	
-	@ManyToMany(mappedBy = "courses") 
+	@ManyToMany(mappedBy = "courses")
+	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
 	
 	
@@ -59,7 +64,19 @@ public class Course {
 		this.reviews = reviews;
 		this.students = students;
 	}
+	
+	public Course( String name, LocalDateTime lastUpdatedDate, LocalDateTime createdDate,
+			List<Review> reviews, List<Student> students) {
+		super();
+		this.name = name;
+		this.lastUpdatedDate = lastUpdatedDate;
+		this.createdDate = createdDate;
+		this.reviews = reviews;
+		this.students = students;
+	}
 
+	
+	 
 	public List<Student> getStudents() {
 		return students;
 	}

@@ -1,7 +1,12 @@
-INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10001,'JPA', current_timestamp(), current_timestamp());
+INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10001,'JPA in 100 steps', current_timestamp(), current_timestamp());
 INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10002,'Spring security', current_timestamp(), current_timestamp());
-INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10003,'Microservices', current_timestamp(), current_timestamp());
+INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10003,'Microservices in 100 steps', current_timestamp(), current_timestamp());
 INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10004,'GraphQL', current_timestamp(), current_timestamp());
+/*INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10005,'KAFKA', current_timestamp(), current_timestamp());
+INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10006,'ZOOKeeper', current_timestamp(), current_timestamp());
+INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10007,'kubernetes', current_timestamp(), current_timestamp());
+INSERT INTO COURSE(id , name , last_updated_date , created_date) VALUES (10008,'Docker', current_timestamp(), current_timestamp());
+*/
 
 INSERT INTO PASSPORT(id , number) VALUES(4001,'W23803');
 INSERT INTO PASSPORT(id , number) VALUES(4002,'FD98wW');
